@@ -1,0 +1,35 @@
+{
+  "name": "reminders-cli",
+  "description": "Create and edit reminders from your terminal",
+  "version": "0.0.1",
+  "author": "Lucas Bento <lucas.bsilva@outlook.com>",
+  "dependencies": {
+    "applescript": "^1.0.0",
+    "run-applescript": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-jest": "^19.0.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "https://github.com/lucasbento/reminders-cli",
+  "scripts": {
+    "build": "npm run clear && babel src --ignore *.spec.js --out-dir dist --copy-files",
+    "clear": "rm -rf ./dist",
+    "lint": "eslint ./src",
+    "prepublish": "npm run build",
+    "test": "jest",
+    "watch": "babel -w -d ./dist ./src --copy-files"
+  }
+}

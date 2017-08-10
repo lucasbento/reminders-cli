@@ -1,0 +1,15 @@
+# WebStorm
+.idea
+
+# OSX
+.DS_Store
+
+# npm
+node_modules
+npm-debug.log
+
+# Build folders
+dist
+
+# Test
+coverage

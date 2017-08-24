@@ -3,6 +3,8 @@ import 'babel-polyfill';
 import yargs, { argv } from 'yargs';
 import applescript from 'applescript';
 
+import { list, add } from './commands';
+
 yargs.usage('Command-line utility to handle reminders on Mac OSX.', {
   'list': {
     description: 'List all reminders that are not completed.',
@@ -11,38 +13,17 @@ yargs.usage('Command-line utility to handle reminders on Mac OSX.', {
   'add': {
     description: 'Create a new reminder.',
     requiresArg: true,
-    short: 'a'
-  }
+    short: 'a',
+  },
 });
-
-const showReminderList = async () => {
-  applescript.execFile(`${__dirname}/scripts/get_reminders.applescript`, function(err, rtn) {
-    if (err) {
-      console.log(err);
-      // Something went wrong!
-    }
-    console.log(rtn)
-  });
-};
-
-const addReminder = ({ date, time }) => {
-  applescript.execFile(`${__dirname}/scripts/add_reminder.applescript`, [ date, time ], function(err, rtn) {
-    if (err) {
-      console.log(err);
-      // Something went wrong!
-    }
-
-    console.log(rtn)
-  });
-};
 
 const run = () => {
   if (argv.list || argv.l) {
-    return showReminderList();
+    return list();
   }
 
   if (argv.add || argv.a) {
-    return addReminder({
+    return add({
       date: argv.add || argv.a,
       time: argv._[0], // TODO: figure out a better way to get time
     });

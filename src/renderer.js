@@ -55,6 +55,8 @@ class Renderer {
     this.screen.onceKey(ESCAPE_KEYS, this.closeScreen);
   }
 
+  destroy = () => this.screen.destroy();
+
   closeScreen = () => process.exit();
 }
 

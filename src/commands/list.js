@@ -1,9 +1,21 @@
 import applescript from 'applescript-promise';
 
-const showReminderList = async () => {
-  const res = await applescript.execFile(`${__dirname}/../scripts/get_reminders.applescript`);
+import Renderer from '../renderer';
 
-  console.log('response', res);
+const renderer = new Renderer();
+
+const showReminderList = async () => {
+  renderer.showLoading('Loading reminders');
+
+  const reminders = await applescript.execFile(`${__dirname}/../scripts/get_reminders.applescript`);
+
+  renderer.stopLoading();
+
+  renderer.render(reminders);
+
+  renderer.list.on('select', item => {
+    console.log(renderer.list.getItemIndex(item.content));
+  });
 };
 
 export default showReminderList;

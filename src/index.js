@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 
 import yargs, { argv } from 'yargs';
-import applescript from 'applescript';
 
 import { list, add } from './commands';
 
@@ -24,8 +23,9 @@ const run = () => {
 
   if (argv.add || argv.a) {
     return add({
-      date: argv.add || argv.a,
-      time: argv._[0], // TODO: figure out a better way to get time
+      name: argv.add || argv.a,
+      date: argv._[0], // TODO: figure out a better way to get date & time
+      time: argv._[1],
     });
   }
 

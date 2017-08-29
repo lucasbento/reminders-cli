@@ -21,6 +21,8 @@ const addReminder = async (providedArgs) => {
         message: 'What\'s the name of the reminder?',
       },
     );
+  } else {
+    console.log(`${tic} Creating ${info.name}...`);
   }
 
   if (!providedArgs.date) {
@@ -54,7 +56,7 @@ const addReminder = async (providedArgs) => {
 
   spinner.start();
 
-  spinner.text = 'Adding a new reminder...';
+  spinner.text = 'Creating the new reminder...';
 
   try {
     await applescript.execFile(scriptPath, Object.values(info));

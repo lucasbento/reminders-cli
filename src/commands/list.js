@@ -1,58 +1,92 @@
 import applescript from 'applescript-promise';
+import ora from 'ora';
 import inquirer from 'inquirer';
-import format from 'date-fns/format';
-
-import Renderer from '../renderer';
-
-const renderer = new Renderer();
+import moment from 'moment';
+import chalk from 'chalk';
 
 const getRemindersPath = `${__dirname}/../scripts/get_reminders.applescript`;
 const updateReminderPath = `${__dirname}/../scripts/update_reminder.applescript`;
 const getReminderPath = `${__dirname}/../scripts/get_reminder.applescript`;
 
+const spinner = ora();
+
+const dateFormat = 'dddd, D MMMM YYYY H:mm:ss';
+
 const showReminderList = async () => {
-  renderer.showLoading('Loading reminders');
+  spinner.start();
+
+  spinner.text = 'Loading reminders';
 
   const reminders = await applescript.execFile(getRemindersPath);
 
-  renderer.stopLoading();
+  spinner.stop();
 
-  renderer.render(reminders);
+  const reminderList = [
+    {
+      type: 'list',
+      name: 'name',
+      message: 'Reminders',
+      choices: reminders,
+    },
+  ];
 
-  renderer.list.on('select', ({ content }) => {
-    renderer.destroy();
+  const chosenReminder = await inquirer.prompt(reminderList);
 
-    handleUpdateReminder(content);
-  });
-};
+  spinner.start();
 
-const handleUpdateReminder = async (name) => {
-  const reminderDate = await applescript.execFile(getReminderPath, [name]);
-  const formattedReminderDate = format(reminderDate, 'DD/MM/YYYY-HH:mm').split('-');
+  spinner.text = 'Loading reminder information';
 
-  const questions = [{
-    type: 'input',
-    name: 'name',
-    message: 'What\'s the name of the reminder?',
-    default: name,
-  }, {
-    type: 'input',
-    name: 'date',
-    message: 'What\'s the due date of the reminder?',
-    default: formattedReminderDate[0],
-  }, {
-    type: 'input',
-    name: 'time',
-    message: 'What\'s the time of the reminder?',
-    default: formattedReminderDate[1],
-  }];
+  const reminderInfo = await applescript.execFile(getReminderPath, [chosenReminder.name]);
+  const reminderDate = moment(reminderInfo, dateFormat).format('DD/MM/YYYY-HH:mm').split('-');
+
+  spinner.stop();
+
+  const questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What\'s the name of the reminder?',
+      default: chosenReminder.name,
+    }, {
+      type: 'input',
+      name: 'date',
+      message: 'What\'s the due date of the reminder?',
+      default: reminderDate[0],
+    }, {
+      type: 'input',
+      name: 'time',
+      message: 'What\'s the time of the reminder?',
+      default: reminderDate[1],
+    },
+  ];
 
   const response = await inquirer.prompt(questions);
-  const args = Object.values(response);
 
-  const reminder = await applescript.execFile(updateReminderPath, args);
+  updateReminder(chosenReminder.name, response);
+};
 
-  console.log('rem:', reminder);
+const updateReminder = async (reminderName, { name, date, time }) => {
+  spinner.start();
+  spinner.text = 'Updating reminder';
+
+  const datetime = moment(`${date} ${time}`, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+  const args = [
+    reminderName,
+    name,
+    datetime,
+  ];
+
+  try {
+    await applescript.execFile(updateReminderPath, args);
+
+    spinner.stop();
+
+    console.log(`${chalk.green('✓')} Reminder ${name} updated!`);
+  } catch (err) {
+    spinner.stop();
+
+    console.log(`${chalk.red('✗')} There was an error while trying to update reminder`);
+  }
 };
 
 export default showReminderList;

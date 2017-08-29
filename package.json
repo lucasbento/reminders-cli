@@ -7,8 +7,8 @@
     "applescript-promise": "^0.0.1",
     "blessed": "^0.1.81",
     "chalk": "^2.1.0",
-    "date-fns": "^1.28.5",
     "inquirer": "^3.2.2",
+    "moment": "^2.18.1",
     "ora": "^1.3.0",
     "yargs": "^8.0.2"
   },

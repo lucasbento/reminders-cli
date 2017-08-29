@@ -85,7 +85,7 @@ const updateReminder = async (reminderName, { name, date, time }) => {
   } catch (err) {
     spinner.stop();
 
-    console.log(`${chalk.red('✗')} There was an error while trying to update reminder`);
+    console.log(`${chalk.red('✗')} There was an error while trying to update reminder. 😕`);
   }
 };
 

@@ -1,21 +1,63 @@
 import applescript from 'applescript-promise';
 import chalk from 'chalk';
 import ora from 'ora';
+import inquirer from 'inquirer';
 
 const tic = chalk.green('✓');
 const tac = chalk.red('✗');
 
 const spinner = ora();
 
-const addReminder = async ({ name, date, time }) => {
+const scriptPath = `${__dirname}/../scripts/add_reminder.applescript`;
+
+const addReminder = async (providedArgs) => {
+  let info = providedArgs;
+  const questions = [];
+  if (!providedArgs.name) {
+    questions.push(
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What\'s the name of the reminder?',
+      },
+    );
+  }
+
+  if (!providedArgs.date) {
+    questions.push(
+      {
+        type: 'input',
+        name: 'date',
+        message: 'What\'s the due date of the reminder?',
+      },
+    );
+  }
+
+  if (!providedArgs.time) {
+    questions.push(
+      {
+        type: 'input',
+        name: 'time',
+        message: 'What\'s the time of the reminder?',
+      },
+    );
+  }
+
+  if (questions.length) {
+    const response = await inquirer.prompt(questions);
+
+    info = {
+      ...info,
+      ...response,
+    };
+  }
+
   spinner.start();
 
   spinner.text = 'Adding a new reminder...';
 
-  const scriptPath = `${__dirname}/../scripts/add_reminder.applescript`;
-
   try {
-    await applescript.execFile(scriptPath, [ name, date, time ]);
+    await applescript.execFile(scriptPath, Object.values(info));
 
     spinner.stop();
 

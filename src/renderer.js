@@ -4,14 +4,17 @@ import ora from 'ora';
 const ESCAPE_KEYS = ['escape', 'q', 'C-c'];
 
 class Renderer {
-  screen = blessed.screen();
-  loading = blessed.loading({
-    align: 'center',
-    top: 'center',
-    left: 'center',
-  });
-
   showLoading(text) {
+    if (!this.screen) {
+      this.screen = blessed.screen();
+    }
+
+    this.loading = blessed.loading({
+      align: 'center',
+      top: 'center',
+      left: 'center',
+    });
+
     this.screen.append(this.loading);
 
     this.loading.load(text);
@@ -20,6 +23,10 @@ class Renderer {
   stopLoading = () => this.loading.stop();
 
   render(items) {
+    if (!this.screen) {
+      this.screen = blessed.screen();
+    }
+
     this.list = blessed.list({
       items,
       height: '100%',

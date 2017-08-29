@@ -48,11 +48,11 @@ const handleUpdateReminder = async (name) => {
   }];
 
   const response = await inquirer.prompt(questions);
+  const args = Object.values(response);
 
-  console.log('res:', response);
-  // const reminder = await applescript.execFile(updateReminderPath, [name]);
-  //
-  // console.log('rem:', reminder);
+  const reminder = await applescript.execFile(updateReminderPath, args);
+
+  console.log('rem:', reminder);
 };
 
 export default showReminderList;

@@ -1,5 +1,26 @@
 # reminders-cli
 
+## Development
+
+1. Install
+```sh
+yarn # or npm install
+```
+
+2. Run build with auto-reloading
+```sh
+yarn run watch
+```
+
+3. Try commands
+```
+node ./dist/index.js --list # To list reminders
+node ./dist/index.js --add "My reminder" 11/11/2017 10:30
+node ./dist/index.js --add "My reminder"
+```
+
+---
+
 - Script: https://gist.github.com/renfredxh/7836327
 - https://github.com/sindresorhus/run-applescript
 - https://github.com/TooTallNate/node-applescript/issues/12

@@ -1,5 +1,7 @@
 on run argv
   tell application "Reminders"
-    set reminder to last reminder whose name is item 1 of argv
+    set currentReminder to get due date of last reminder whose name is item 1 of argv
+
+    return  date string of currentReminder & " " & time string of currentReminder
   end tell
 end run

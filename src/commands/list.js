@@ -1,5 +1,6 @@
 import applescript from 'applescript-promise';
 import inquirer from 'inquirer';
+import format from 'date-fns/format';
 
 import Renderer from '../renderer';
 
@@ -26,28 +27,29 @@ const showReminderList = async () => {
 };
 
 const handleUpdateReminder = async (name) => {
-  const reminder = await applescript.execFile(getReminderPath, [name]);
+  const reminderDate = await applescript.execFile(getReminderPath, [name]);
+  const formattedReminderDate = format(reminderDate, 'DD/MM/YYYY-HH:mm').split('-');
 
-  console.log('rem', reminder)
+  const questions = [{
+    type: 'input',
+    name: 'name',
+    message: 'What\'s the name of the reminder?',
+    default: name,
+  }, {
+    type: 'input',
+    name: 'date',
+    message: 'What\'s the due date of the reminder?',
+    default: formattedReminderDate[0],
+  }, {
+    type: 'input',
+    name: 'time',
+    message: 'What\'s the time of the reminder?',
+    default: formattedReminderDate[1],
+  }];
 
-  // const questions = [{
-  //   type: 'input',
-  //   name: 'name',
-  //   message: 'What\'s the name of the reminder?',
-  //   default: name,
-  // }, {
-  //   type: 'input',
-  //   name: 'date',
-  //   message: 'What\'s the due date of the reminder?',
-  // }, {
-  //   type: 'input',
-  //   name: 'time',
-  //   message: 'What\'s the time of the reminder?',
-  // }];
-  //
-  // const response = await inquirer.prompt(questions);
-  //
-  // console.log('res:', response);
+  const response = await inquirer.prompt(questions);
+
+  console.log('res:', response);
   // const reminder = await applescript.execFile(updateReminderPath, [name]);
   //
   // console.log('rem:', reminder);

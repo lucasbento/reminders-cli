@@ -8,6 +8,7 @@
     "blessed": "^0.1.81",
     "chalk": "^2.1.0",
     "inquirer": "^3.2.2",
+    "inquirer-datepicker-prompt": "^0.3.3",
     "moment": "^2.18.1",
     "ora": "^1.3.0",
     "yargs": "^8.0.2"

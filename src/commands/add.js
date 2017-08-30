@@ -2,6 +2,7 @@ import applescript from 'applescript-promise';
 import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
+import moment from 'moment';
 
 const tic = chalk.green('✓');
 const tac = chalk.red('✗');
@@ -9,6 +10,8 @@ const tac = chalk.red('✗');
 const spinner = ora();
 
 const scriptPath = `${__dirname}/../scripts/add_reminder.applescript`;
+
+inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
 
 const addReminder = async (providedArgs) => {
   let info = providedArgs;
@@ -19,6 +22,7 @@ const addReminder = async (providedArgs) => {
         type: 'input',
         name: 'name',
         message: 'What\'s the name of the reminder?',
+        validate: name => !!name,
       },
     );
   } else {
@@ -28,9 +32,10 @@ const addReminder = async (providedArgs) => {
   if (!providedArgs.date) {
     questions.push(
       {
-        type: 'input',
+        type: 'datetime',
         name: 'date',
         message: 'What\'s the due date of the reminder?',
+        format: ['dd', '/', 'mm', '/', 'yyyy'],
       },
     );
   }
@@ -38,15 +43,29 @@ const addReminder = async (providedArgs) => {
   if (!providedArgs.time) {
     questions.push(
       {
-        type: 'input',
+        type: 'datetime',
         name: 'time',
         message: 'What\'s the time of the reminder?',
+        format: ['HH', ':', 'MM'],
+        time: {
+          minutes: {
+            interval: 10,
+          },
+        },
       },
     );
   }
 
   if (questions.length) {
     const response = await inquirer.prompt(questions);
+
+    if (response.date) {
+      response.date = moment(response.date).format('DD/MM/YYYY');
+    }
+
+    if (response.time) {
+      response.time = moment(response.time).format('HH:mm');
+    }
 
     info = {
       ...info,
@@ -59,6 +78,7 @@ const addReminder = async (providedArgs) => {
   spinner.text = 'Creating the new reminder...';
 
   try {
+    console.log('args:', info)
     await applescript.execFile(scriptPath, Object.values(info));
 
     spinner.stop();

@@ -37,26 +37,37 @@ const showReminderList = async () => {
   spinner.text = 'Loading reminder information';
 
   const reminderInfo = await applescript.execFile(getReminderPath, [chosenReminder.name]);
-  const reminderDate = moment(reminderInfo, dateFormat).format('DD/MM/YYYY-HH:mm').split('-');
+  const reminderDate = moment(reminderInfo, dateFormat);
 
   spinner.stop();
+
+  // eslint-disable-next-line global-require
+  inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
 
   const questions = [
     {
       type: 'input',
       name: 'name',
-      message: 'What\'s the name of the reminder?',
+      message: 'Name?',
       default: chosenReminder.name,
+      validate: name => !!name,
     }, {
-      type: 'input',
+      type: 'datetime',
       name: 'date',
-      message: 'What\'s the due date of the reminder?',
-      default: reminderDate[0],
+      message: 'Date?',
+      default: new Date(reminderDate.toISOString()),
+      format: ['dd', '/', 'mm', '/', 'yyyy'],
     }, {
-      type: 'input',
+      type: 'datetime',
       name: 'time',
-      message: 'What\'s the time of the reminder?',
-      default: reminderDate[1],
+      message: 'Time?',
+      default: new Date(reminderDate.toISOString()),
+      format: ['HH', ':', 'MM'],
+      time: {
+        minutes: {
+          interval: 10,
+        },
+      },
     },
   ];
 

@@ -2,7 +2,15 @@
   "name": "reminders-cli",
   "description": "Create and edit reminders from your terminal",
   "version": "0.0.1",
-  "author": "Lucas Bento <lucas.bsilva@outlook.com>",
+  "author": {
+    "name": "Lucas Bento",
+    "email": "lucas.bsilva@outlook.com",
+    "url": "https://github.com/lucasbento"
+  },
+  "bin": {
+    "reminders": "./bin/reminders"
+  },
+  "bugs": "https://github.com/lucasbento/reminders-cli/issues",
   "dependencies": {
     "applescript-promise": "^0.0.1",
     "blessed": "^0.1.81",
@@ -23,12 +31,26 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "jest": "^19.0.2",
-    "jest-cli": "^19.0.2"
+    "jest": "^20.0.4"
   },
+  "homepage": "https://github.com/lucasbento/reminders-cli#readme",
+  "keywords": [
+    "apple",
+    "applescript",
+    "mac",
+    "node",
+    "osascript",
+    "osx",
+    "reminder",
+    "reminders"
+  ],
   "license": "MIT",
   "main": "index.js",
-  "repository": "https://github.com/lucasbento/reminders-cli",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/lucasbento/reminders-cli"
+  },
   "scripts": {
     "build": "npm run clear && babel src --ignore *.spec.js --out-dir dist --copy-files",
     "clear": "rm -rf ./dist",

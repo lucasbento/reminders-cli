@@ -3,7 +3,7 @@ on run argv
     set currentReminder to get last reminder whose name is item 1 of argv
 
     set name of currentReminder to item 2 of argv
-    set due date of currentReminder to my convertDate(item 3 of argv)
+    set remind me date of currentReminder to my convertDate(item 3 of argv)
   end tell
 end run
 

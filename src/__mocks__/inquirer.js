@@ -1,4 +1,33 @@
+import { REMINDER_NAME } from '../../test/helper';
+
 let prompts = [];
+
+const DATE_ANSWER = '11/11/2030';
+const TIME_ANSWER = '10:00';
+
+const getAnswer = ({ type, choices, name, default: defaultAnswer }) => {
+  if (type === 'list') {
+    return choices[choices.length - 1];
+  }
+
+  if (defaultAnswer) {
+    return defaultAnswer;
+  }
+
+  if (name === 'date') {
+    return DATE_ANSWER;
+  }
+
+  if (name === 'time') {
+    return TIME_ANSWER;
+  }
+
+  if (name === 'name') {
+    return REMINDER_NAME;
+  }
+
+  return `${name} value`;
+};
 
 export default {
   prompt: (questions) => {
@@ -9,28 +38,14 @@ export default {
 
     let answers = {};
     questions.forEach((question) => {
-      if (question.type === 'list') {
-        const lastChoice = question.choices[question.choices.length - 1];
-
-        answers = {
-          ...answers,
-          [question.name]: lastChoice,
-        };
-      }
-
-      if (question.type === 'input') {
-        // TODO: make it work for questions without `default`
-        console.log('question', question.default);
-        if (question.default) {
-          answers = {
-            ...answers,
-            [question.name]: question.default,
-          };
-        }
-      }
+      answers = {
+        ...answers,
+        [question.name]: getAnswer(question),
+      };
     });
 
     return answers;
   },
   getPrompts: () => prompts,
+  resetPrompts: () => prompts = [], // eslint-disable-line no-return-assign
 };

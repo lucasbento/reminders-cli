@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 
 import yargs, { argv } from 'yargs';
-
 import { list, add } from './commands';
 
 yargs.usage('Command-line utility to handle reminders on Mac OSX.', {

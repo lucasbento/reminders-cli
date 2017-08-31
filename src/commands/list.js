@@ -10,8 +10,6 @@ const getReminderPath = `${__dirname}/../scripts/get_reminder.applescript`;
 
 const spinner = ora();
 
-const dateFormat = 'dddd, D MMMM YYYY H:mm:ss';
-
 const showReminderList = async () => {
   spinner.start();
 
@@ -36,6 +34,7 @@ const showReminderList = async () => {
 
   spinner.text = 'Loading reminder information';
 
+  const dateFormat = 'dddd, D MMMM YYYY H:mm:ss';
   const reminderInfo = await applescript.execFile(getReminderPath, [chosenReminder.name]);
   const reminderDate = moment(reminderInfo, dateFormat).format('DD/MM/YYYY-HH:mm').split('-');
 

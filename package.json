@@ -51,12 +51,15 @@
     "type": "git",
     "url": "http://github.com/lucasbento/reminders-cli"
   },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/index.js"
+  },
   "scripts": {
-    "build": "npm run clear && babel src --ignore *.spec.js --out-dir dist --copy-files",
+    "build": "npm run clear && babel src --ignore *.spec.js,__tests__,__mocks__ --out-dir dist --copy-files",
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src",
     "prepublish": "npm run build",
     "test": "jest",
-    "watch": "babel -w -d ./dist ./src --copy-files"
+    "watch": "babel --ignore *.spec.js,__tests__,__mocks__ -w -d ./dist ./src --copy-files"
   }
 }

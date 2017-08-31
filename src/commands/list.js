@@ -10,12 +10,14 @@ const getReminderPath = `${__dirname}/../scripts/get_reminder.applescript`;
 
 const spinner = ora();
 
+export const getReminders = () => applescript.execFile(getRemindersPath);
+
 const showReminderList = async () => {
   spinner.start();
 
   spinner.text = 'Loading reminders';
 
-  const reminders = await applescript.execFile(getRemindersPath);
+  const reminders = await getReminders();
 
   spinner.stop();
 

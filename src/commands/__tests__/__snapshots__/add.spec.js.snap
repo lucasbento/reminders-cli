@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should handle the add command 1`] = `
+Array [
+  Object {
+    "message": "What's the name of the reminder?",
+    "name": "name",
+    "type": "input",
+  },
+  Object {
+    "message": "What's the due date of the reminder?",
+    "name": "date",
+    "type": "input",
+  },
+  Object {
+    "message": "What's the time of the reminder?",
+    "name": "time",
+    "type": "input",
+  },
+]
+`;
+
+exports[`should handle the add command with args 1`] = `
+Array [
+  Object {
+    "message": "What's the due date of the reminder?",
+    "name": "date",
+    "type": "input",
+  },
+  Object {
+    "message": "What's the time of the reminder?",
+    "name": "time",
+    "type": "input",
+  },
+]
+`;

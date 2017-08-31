@@ -3,12 +3,17 @@ import moment from 'moment';
 import inquirer from '../../__mocks__/inquirer';
 import list from '../list';
 import {
+  addReminder,
   REMINDER_NAME,
   NUMBER_DAYS_REMINDER_DATE,
   REMINDER_HOUR,
 } from '../../../test/helper';
 
-it('should trigger the list command', async () => {
+beforeEach(async () => {
+  await addReminder();
+});
+
+it('should handle the list command', async () => {
   await list();
 
   const prompts = inquirer.getPrompts();

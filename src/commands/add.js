@@ -10,7 +10,7 @@ const spinner = ora();
 
 const scriptPath = `${__dirname}/../scripts/add_reminder.applescript`;
 
-const addReminder = async (providedArgs) => {
+const addReminder = async (providedArgs = {}) => {
   let info = providedArgs;
   const questions = [];
   if (!providedArgs.name) {

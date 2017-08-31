@@ -59,7 +59,8 @@
     "clear": "rm -rf ./dist",
     "lint": "eslint ./src",
     "prepublish": "npm run build",
-    "test": "jest",
+    "test": "npm run lint && jest --runInBand",
+    "ci": "npm run lint && NODE_ENV=CI jest --runInBand",
     "watch": "babel --ignore *.spec.js,__tests__,__mocks__ -w -d ./dist ./src --copy-files"
   }
 }

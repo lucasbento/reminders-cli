@@ -1,5 +1,5 @@
 <p align="center"> 
-<img align="center" src="logo.gif" />
+<img align="center" src="./logo.gif" />
 </p>
 
 <h1 align="center">reminders-cli</h1>

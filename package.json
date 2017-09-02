@@ -1,7 +1,7 @@
 {
   "name": "reminders-cli",
   "description": "Create and edit reminders from your terminal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Lucas Bento",
     "email": "lucas.bsilva@outlook.com",

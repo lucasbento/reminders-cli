@@ -1,4 +1,6 @@
-# [![AVA](logo.gif)](#)
+<p align="center"> 
+<img align="center" src="logo.gif" />
+</p>
 
 # reminders-cli
 

@@ -21,7 +21,7 @@ brew install node
 #### Manual
 Go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/) and install the latest LTS version.
 
-#### Installing the package
+### Installing the package
 ```console
 yarn global add reminders-cli
 ```

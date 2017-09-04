@@ -2,6 +2,7 @@ import applescript from 'applescript-promise';
 import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
+import { DateRange } from '../utils';
 
 const tic = chalk.green('✓');
 const tac = chalk.red('✗');
@@ -26,11 +27,22 @@ const addReminder = async (providedArgs = {}) => {
   }
 
   if (!providedArgs.date) {
+    const dateRange = new DateRange();
+    const choices = dateRange.getDateChoices();
+
     questions.push(
+      {
+        type: 'list',
+        name: 'date',
+        message: 'What\'s the due date of the reminder?',
+        choices,
+        filter: date => dateRange.getDateValueBasedOnLabel(date).value,
+      },
       {
         type: 'input',
         name: 'date',
         message: 'What\'s the due date of the reminder?',
+        when: ({ date }) => dateRange.checkIsCustomDate(date),
       },
     );
   }

@@ -3,6 +3,7 @@ import ora from 'ora';
 import inquirer from 'inquirer';
 import moment from 'moment';
 import chalk from 'chalk';
+import { DateRange } from '../utils';
 
 const getRemindersPath = `${__dirname}/../scripts/get_reminders.applescript`;
 const updateReminderPath = `${__dirname}/../scripts/update_reminder.applescript`;
@@ -42,6 +43,9 @@ const showReminderList = async () => {
 
   spinner.stop();
 
+  const dateRange = new DateRange(reminderDate[0]);
+  const choices = dateRange.getDateChoices();
+
   const questions = [
     {
       type: 'input',
@@ -49,10 +53,16 @@ const showReminderList = async () => {
       message: 'What\'s the name of the reminder?',
       default: chosenReminder.name,
     }, {
+      type: 'list',
+      name: 'date',
+      message: 'What\'s the due date of the reminder?',
+      choices,
+      filter: date => dateRange.getDateValueBasedOnLabel(date).value,
+    }, {
       type: 'input',
       name: 'date',
       message: 'What\'s the due date of the reminder?',
-      default: reminderDate[0],
+      when: ({ date }) => dateRange.checkIsCustomDate(date),
     }, {
       type: 'input',
       name: 'time',

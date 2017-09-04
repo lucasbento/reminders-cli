@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import inquirer from '../../__mocks__/inquirer';
-import list from '../list';
+import list, { updateReminder, getReminderDate } from '../list';
 import {
   addReminder,
   REMINDER_NAME,
@@ -12,8 +12,6 @@ import {
 beforeEach(async () => {
   await addReminder();
 });
-
-// TODO: provide commands to inquirerjs to update the reminder
 
 it('should handle the list command', async () => {
   await list();
@@ -34,4 +32,19 @@ it('should handle the list command', async () => {
 
   expect(prompts[4].name).toEqual('time');
   expect(prompts[4].default).toEqual(`${REMINDER_HOUR}:00`);
+});
+
+it('should update reminder', async () => {
+  const updatedReminder = {
+    name: `${REMINDER_NAME} updated name`,
+    date: moment().add(5, 'day').format('DD/MM/YYYY'),
+    time: '09:00',
+  };
+
+  await updateReminder(REMINDER_NAME, updatedReminder);
+
+  const reminder = await getReminderDate(updatedReminder);
+
+  expect(reminder[0]).toEqual(updatedReminder.date);
+  expect(reminder[1]).toEqual(updatedReminder.time);
 });

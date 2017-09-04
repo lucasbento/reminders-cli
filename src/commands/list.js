@@ -12,6 +12,11 @@ const getReminderPath = `${__dirname}/../scripts/get_reminder.applescript`;
 const spinner = ora();
 
 export const getReminders = () => applescript.execFile(getRemindersPath);
+export const getReminderDate = async ({ name }) => {
+  const date = await applescript.execFile(getReminderPath, [name]);
+
+  return moment(date, 'dddd, D MMMM YYYY H:mm:ss').format('DD/MM/YYYY-HH:mm').split('-');
+};
 
 const showReminderList = async () => {
   spinner.start();
@@ -37,9 +42,7 @@ const showReminderList = async () => {
 
   spinner.text = 'Loading reminder information';
 
-  const dateFormat = 'dddd, D MMMM YYYY H:mm:ss';
-  const reminderInfo = await applescript.execFile(getReminderPath, [chosenReminder.name]);
-  const reminderDate = moment(reminderInfo, dateFormat).format('DD/MM/YYYY-HH:mm').split('-');
+  const reminderDate = await getReminderDate(chosenReminder);
 
   spinner.stop();
 
@@ -76,7 +79,7 @@ const showReminderList = async () => {
   updateReminder(chosenReminder.name, response);
 };
 
-const updateReminder = async (reminderName, { name, date, time }) => {
+export const updateReminder = async (reminderName, { name, date, time }) => {
   spinner.start();
   spinner.text = 'Updating reminder';
 

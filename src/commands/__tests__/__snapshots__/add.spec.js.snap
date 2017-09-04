@@ -8,9 +8,26 @@ Array [
     "type": "input",
   },
   Object {
+    "choices": Array [
+      "Custom",
+      "Today",
+      "Tomorrow",
+      "In two days",
+      "Next week",
+      "In two weeks",
+      "Next month",
+      "In two months",
+    ],
+    "filter": [Function],
+    "message": "What's the due date of the reminder?",
+    "name": "date",
+    "type": "list",
+  },
+  Object {
     "message": "What's the due date of the reminder?",
     "name": "date",
     "type": "input",
+    "when": [Function],
   },
   Object {
     "message": "What's the time of the reminder?",
@@ -23,9 +40,26 @@ Array [
 exports[`should handle the add command with args 1`] = `
 Array [
   Object {
+    "choices": Array [
+      "Custom",
+      "Today",
+      "Tomorrow",
+      "In two days",
+      "Next week",
+      "In two weeks",
+      "Next month",
+      "In two months",
+    ],
+    "filter": [Function],
+    "message": "What's the due date of the reminder?",
+    "name": "date",
+    "type": "list",
+  },
+  Object {
     "message": "What's the due date of the reminder?",
     "name": "date",
     "type": "input",
+    "when": [Function],
   },
   Object {
     "message": "What's the time of the reminder?",

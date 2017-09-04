@@ -23,7 +23,7 @@ Go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/) and ins
 
 ### Installing the package
 ```console
-yarn global add reminders-cli
+npm install -g reminders-cli
 ```
 
 ### Usage

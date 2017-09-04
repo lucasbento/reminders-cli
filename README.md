@@ -1,5 +1,5 @@
 <p align="center"> 
-<img align="center" src="./logo.gif" />
+<img align="center" src="media/logo.gif" alt="reminders-cli" title="reminders-cli" />
 </p>
 
 <h1 align="center">reminders-cli</h1>
@@ -44,13 +44,21 @@ $ reminders-cli --help
 $ reminders-cli --list
 ```
 
+![List command](media/list_command.gif "List command")
+
 ### Add
+
+```console
+$ reminders-cli --add
+```
+
+![Add command](media/add_command.gif "Add command")
+
+The parameters `name`, `date` and `time` can also be specified as:
 
 ```console
 $ reminders-cli --add "My reminder" 11/11/2017 10:30
 ```
-
-> The parameters `name`, `date` and `time` can be omitted and will be provided as follows:
 
 ## Development
 

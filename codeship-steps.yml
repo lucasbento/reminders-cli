@@ -1,6 +1,6 @@
 - name: Install dependencies
-  service: api
+  service: reminders
   command: yarn install
 - name: Run tests
-  service: api
+  service: reminders
   command: yarn run ci

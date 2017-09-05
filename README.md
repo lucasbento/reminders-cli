@@ -9,23 +9,6 @@
 
 ## Getting started
 
-### Installation
-
-This package requires NodeJS to be installed.
-
-#### Homebrew
-```console
-brew install node
-```
-
-#### Manual
-Go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/) and install the latest LTS version.
-
-### Installing the package
-```console
-npm install -g reminders-cli
-```
-
 ### Usage
 
 ```console
@@ -58,6 +41,23 @@ The parameters `name`, `date` and `time` can also be specified as:
 
 ```console
 $ reminders-cli --add "My reminder" 11/11/2017 10:30
+```
+
+### Installation
+
+This package requires NodeJS to be installed.
+
+#### Homebrew
+```console
+brew install node
+```
+
+#### Manual
+Go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/) and install the latest LTS version.
+
+### Installing the package
+```console
+npm install -g reminders-cli
 ```
 
 ## Development

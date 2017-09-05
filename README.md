@@ -4,7 +4,7 @@
 
 <h1 align="center">reminders-cli</h1>
 <p align="center">
-  Command-line interface to deal with the Reminders.app.
+  Command-line interface to interact with the Reminders.app.
 </p>
 
 ## Getting started

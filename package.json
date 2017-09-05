@@ -1,6 +1,6 @@
 {
   "name": "reminders-cli",
-  "description": "Create and edit reminders from your terminal",
+  "description": "Command-line interface to interact with the Reminders.app",
   "version": "0.0.2",
   "author": {
     "name": "Lucas Bento",

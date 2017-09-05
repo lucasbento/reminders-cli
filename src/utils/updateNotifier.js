@@ -5,24 +5,29 @@ import chalk from 'chalk';
 import pkg from '../../package.json';
 
 export default () => {
-  const { update } = updateNotifier({ pkg, updateCheckInterval: 0 });
+  updateNotifier({
+    pkg,
+    callback: (data, update) => {
+      if (!update || pkg.version === update.latest) {
+        return;
+      }
 
-  if (update) {
-    const message = chalk.cyan(
-      `There\'s an update of ${pkg.name} available:`,
-      chalk.dim(pkg.version), chalk.reset('→'), chalk.blue(update.latest),
-      chalk.dim('\nRun'), chalk.green(chalk.bold(`npm i -g ${pkg.name}`)), chalk.dim('to update.'),
-    );
+      const message = chalk.cyan(
+        `There's an update of ${pkg.name} available:`,
+        chalk.dim(pkg.version), chalk.reset('→'), chalk.blue(update.latest),
+        chalk.dim('\nRun'), chalk.green(chalk.bold(`npm i -g ${pkg.name}`)), chalk.dim('to update.'),
+      );
 
-    const boxenOptions = {
-      padding: 1,
-      borderColor: 'blue',
-      dimBorder: true,
-      float: 'center',
-      align: 'center',
-      margin: 1,
-    };
+      const boxenOptions = {
+        padding: 1,
+        borderColor: 'blue',
+        dimBorder: true,
+        float: 'center',
+        align: 'center',
+        margin: 1,
+      };
 
-    console.log(boxen(message, boxenOptions));
-  }
+      console.log(boxen(message, boxenOptions));
+    },
+  });
 };

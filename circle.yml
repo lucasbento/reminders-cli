@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 6.11.2
+test:
+  override:
+    - yarn run ci
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn

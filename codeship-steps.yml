@@ -1,0 +1,6 @@
+- name: Install dependencies
+  service: api
+  command: yarn install
+- name: Run tests
+  service: api
+  command: yarn run ci

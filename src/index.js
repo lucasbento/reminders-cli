@@ -1,7 +1,9 @@
 import 'babel-polyfill';
 
 import yargs, { argv } from 'yargs';
+
 import { list, add } from './commands';
+import updateNotifier from './utils/updateNotifier';
 
 yargs.usage('Command-line utility to handle reminders on Mac OSX.', {
   list: {
@@ -35,4 +37,5 @@ const run = () => {
   return yargs.showHelp();
 };
 
+updateNotifier();
 run();

@@ -2,8 +2,8 @@ import 'babel-polyfill';
 
 import yargs, { argv } from 'yargs';
 
-import { list, add } from './commands';
-import updateNotifier from './utils/updateNotifier';
+import { list, add, complete } from './commands';
+import { updateNotifier } from './utils';
 
 yargs.usage('Command-line utility to handle reminders on Mac OSX.', {
   list: {
@@ -13,6 +13,10 @@ yargs.usage('Command-line utility to handle reminders on Mac OSX.', {
   add: {
     description: 'Create a new reminder.',
     short: 'a',
+  },
+  complete: {
+    description: 'Complete a reminder.',
+    short: 'c',
   },
 });
 
@@ -32,6 +36,10 @@ const run = () => {
       date: argv._[0], // TODO: figure out a better way to get date & time
       time: argv._[1],
     });
+  }
+
+  if (argv.complete || argv.c) {
+    return complete();
   }
 
   return yargs.showHelp();

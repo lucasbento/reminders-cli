@@ -1,7 +1,7 @@
 {
   "name": "reminders-cli",
   "description": "Command-line interface to interact with the Reminders.app",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Lucas Bento",
     "email": "lucas.bsilva@outlook.com",

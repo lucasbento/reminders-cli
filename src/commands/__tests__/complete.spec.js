@@ -19,8 +19,16 @@ it('should list the reminders', async () => {
   expect(prompts[0].choices).toEqual(expect.arrayContaining([REMINDER_NAME]));
 });
 
-it('should complete reminder', async () => {
-  await completeReminder({ name: REMINDER_NAME });
+it('should complete reminder with exact name', async () => {
+  await completeReminder(REMINDER_NAME);
+
+  const reminders = await getReminders();
+
+  expect(reminders).not.toEqual(expect.arrayContaining([REMINDER_NAME]));
+});
+
+it('should complete reminder with part of name', async () => {
+  await completeReminder(REMINDER_NAME.slice(4, 9), true);
 
   const reminders = await getReminders();
 

@@ -39,7 +39,12 @@ const run = () => {
   }
 
   if (argv.complete || argv.c) {
-    return complete();
+    let name = null;
+    if (typeof argv.complete !== 'boolean' && typeof argv.c !== 'boolean') {
+      name = argv.complete || argv.c;
+    }
+
+    return complete(name);
   }
 
   return yargs.showHelp();

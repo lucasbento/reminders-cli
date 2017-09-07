@@ -17,9 +17,10 @@ $ reminders-cli --help
     Command-line utility to handle reminders on Mac OSX.
 
     Options:
-      --list      List all reminders that are not completed.
-      --add       Create a new reminder.
-      --complete  Complete a reminder.
+      --list      List all reminders that are not completed
+      --add       Create a new reminder
+      --complete  Complete a reminder
+      --version   Package version
 ```
 
 ### List

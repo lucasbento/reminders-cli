@@ -1,62 +1,36 @@
 import 'babel-polyfill';
 
-import yargs, { argv } from 'yargs';
+import meow from 'meow';
 
 import { list, add, complete } from './commands';
-import { updateNotifier } from './utils';
-import pkg from '../package.json';
+import { updateNotifier, date } from './utils';
 
-yargs.usage('Command-line utility to handle reminders on Mac OSX', {
-  list: {
-    description: 'List all reminders that are not completed',
-    short: 'l',
-  },
-  add: {
-    description: 'Create a new reminder',
-    short: 'a',
-  },
-  complete: {
-    description: 'Complete a reminder',
-    short: 'c',
-  },
-  version: {
-    description: 'Package version',
-    short: 'v',
-  },
-});
+const cli = meow(`
+  Usage
+    $ remind <input>
+
+  Examples
+    $ remind me to feed the cats tomorrow at 12:00
+`);
 
 const run = () => {
-  if (argv.list || argv.l) {
+  if ((!cli.input.length && !Object.keys(cli.flags).length) || cli.flags.list) {
     return list();
   }
 
-  if (argv.add || argv.a) {
-    let name = null;
-    if (typeof argv.add !== 'boolean' && typeof argv.a !== 'boolean') {
-      name = argv.add || argv.a;
-    }
-
-    return add({
-      name,
-      date: argv._[0], // TODO: figure out a better way to get date & time
-      time: argv._[1],
-    });
+  if (cli.flags.complete) {
+    return complete((typeof cli.flags.complete !== 'boolean') && cli.flags.complete);
   }
 
-  if (argv.complete || argv.c) {
-    let name = null;
-    if (typeof argv.complete !== 'boolean' && typeof argv.c !== 'boolean') {
-      name = argv.complete || argv.c;
-    }
+  const phrase = cli.input.join(' ');
 
-    return complete(name);
-  }
+  const parsedPhrase = date.parsePhrase(phrase);
 
-  if (argv.version || argv.v) {
-    return console.log(`${pkg.name} version ${pkg.version}`);
-  }
-
-  return yargs.showHelp();
+  return add({
+    name: parsedPhrase.name,
+    date: parsedPhrase.startDate,
+    time: parsedPhrase.startTime,
+  });
 };
 
 updateNotifier();

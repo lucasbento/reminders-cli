@@ -26,6 +26,10 @@ const run = () => {
 
   const parsedPhrase = date.parsePhrase(phrase);
 
+  if (!parsedPhrase) {
+    return add();
+  }
+
   return add({
     name: parsedPhrase.name,
     date: parsedPhrase.startDate,

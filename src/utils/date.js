@@ -21,6 +21,10 @@ const clearPhrase = (phrase) => {
 export const parsePhrase = (phrase) => {
   const [parsedPhrase] = chrono.parse(phrase);
 
+  if (!parsedPhrase) {
+    return null;
+  }
+
   const eventName = phrase.replace(parsedPhrase.text, '');
 
   const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('DD/MM/YYYY-HH:mm').split('-');

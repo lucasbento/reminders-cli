@@ -4,6 +4,7 @@ on run argv
 
     set name of currentReminder to item 2 of argv
     set remind me date of currentReminder to my convertDate(item 3 of argv)
+    quit
   end tell
 end run
 

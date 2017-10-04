@@ -4,5 +4,6 @@ tell application "Reminders"
         set reminderList to name of reminders whose completed is false
     end if
 
+    quit
     return reminderList
 end tell

@@ -4,7 +4,7 @@
 
 <h1 align="center">reminders-cli</h1>
 <p align="center">
-  Command-line interface to interact with the Reminders.app.
+  Command-line interface that uses natural language processing to parse phrases and interact with Reminders.app.
 </p>
 
 ## Getting started
@@ -12,23 +12,25 @@
 ### Usage
 
 ```console
-$ reminders-cli --help
+$ reminders --help
 
-    Command-line utility to handle reminders on Mac OSX.
+  Usage
+    $ remind <input>
+    $ reminders
+  
+  Options
+    --list      - List all reminders (will trigger if no option is provided).
+    --complete  - List all reminders and enable a selector to be completed
 
-    Options:
-      --list      List all reminders that are not completed
-      --add       Create a new reminder
-      --complete  Complete a reminder
-      --version   Package version
+  Examples
+    $ remind me to feed the cats tomorrow at 12:00
+    $ reminders --list
 ```
 
 ### Create
 
-reminders-cli uses natural language processing to parse and then create the reminders.
-
 ```console
-$ remind me to feed the cats tomorrow at 9
+$ remind me in two hours to study
 ```
 
 ![Add command](media/add_command.gif "Add command")
@@ -38,7 +40,7 @@ $ remind me to feed the cats tomorrow at 9
 ### List
 
 ```console
-$ reminders-cli --list
+$ reminders --list
 ```
 
 ![List command](media/list_command.gif "List command")
@@ -46,7 +48,7 @@ $ reminders-cli --list
 ### Complete
 
 ```console
-$ reminders-cli --complete
+$ reminders --complete
 ```
 
 ![Complete command](media/complete_command.gif "Complete command")

@@ -1,7 +1,7 @@
 {
   "name": "reminders-cli",
-  "description": "Command-line interface to interact with the Reminders.app",
-  "version": "0.0.6",
+  "description": "Command-line interface that uses natural language processing to parse phrases and interact with Reminders.app.",
+  "version": "0.1.0",
   "author": {
     "name": "Lucas Bento",
     "email": "lucas.bsilva@outlook.com",

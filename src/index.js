@@ -8,9 +8,15 @@ import { updateNotifier, date } from './utils';
 const cli = meow(`
   Usage
     $ remind <input>
+    $ reminders
+
+  Options
+    --list      - List all reminders (will trigger if no option is provided).
+    --complete  - List all reminders and enable a selector to be completed
 
   Examples
     $ remind me to feed the cats tomorrow at 12:00
+    $ reminders --list
 `);
 
 const run = () => {

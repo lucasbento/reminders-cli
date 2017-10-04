@@ -23,6 +23,18 @@ $ reminders-cli --help
       --version   Package version
 ```
 
+### Create
+
+reminders-cli uses natural language processing to parse and then create the reminders.
+
+```console
+$ remind me to feed the cats tomorrow at 9
+```
+
+![Add command](media/add_command.gif "Add command")
+
+> You can see some examples in the [date parsing test file](https://github.com/lucasbento/reminders-cli/blob/master/src/utils/__tests__date.spec.js#5).
+
 ### List
 
 ```console
@@ -30,20 +42,6 @@ $ reminders-cli --list
 ```
 
 ![List command](media/list_command.gif "List command")
-
-### Add
-
-```console
-$ reminders-cli --add
-```
-
-![Add command](media/add_command.gif "Add command")
-
-The parameters `name`, `date` and `time` can also be specified as:
-
-```console
-$ reminders-cli --add "My reminder" 11/11/2017 10:30
-```
 
 ### Complete
 

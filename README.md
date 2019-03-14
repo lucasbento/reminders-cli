@@ -9,6 +9,8 @@
 
 ## Getting started
 
+> TLDR: **run `npm i -g reminders-cli` and `reminders --help`**.
+
 ### Usage
 
 ```console

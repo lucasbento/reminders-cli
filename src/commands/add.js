@@ -68,11 +68,11 @@ const addReminder = async (providedArgs = {}) => {
 
   spinner.start();
 
-  spinner.text = 'Creating the new reminder.........!';
+  spinner.text = 'Creating the new reminder...';
 
   try {
     info.name = `${info.name[0].toUpperCase()}${info.name.slice(1)}`;
-    console.log(info);
+
     await applescript.execFile(scriptPath, Object.values(info));
 
     spinner.stop();

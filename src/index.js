@@ -40,6 +40,7 @@ const run = () => {
     name: parsedPhrase.name,
     date: parsedPhrase.startDate,
     time: parsedPhrase.startTime,
+    dateTime: parsedPhrase.startDateTime
   });
 };
 

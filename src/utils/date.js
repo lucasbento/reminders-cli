@@ -41,7 +41,6 @@ export const parsePhrase = (phrase) => {
   const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('DD/MM/YYYY-HH:mm').split('-');
   startDate[1] = formatAMPM(parsedPhrase.start.date()).toUpperCase();
   const endDate = parsedPhrase.end && moment(parsedPhrase.end.date()).format('DD/MM/YYYY-HH:mm').split('-');
-  // startDate[1] = formatAMPM(parsedPhrase.start.date()).toUpperCase();
 
   return {
     name: clearPhrase(eventName),

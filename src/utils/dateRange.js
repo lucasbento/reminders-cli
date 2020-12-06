@@ -68,7 +68,7 @@ class DateRange {
       }
     }
 
-    return date.format('DD/MM/YYYY');
+    return date.format('L');
   };
 
   today = () => this.parseDate();

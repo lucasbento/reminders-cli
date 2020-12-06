@@ -25,10 +25,15 @@ export const parsePhrase = (phrase) => {
     return null;
   }
 
+  // Change default time to 09:00 instead of 12:00
+  if (parsedPhrase.start.impliedValues.hour === 12) {
+    parsedPhrase.start.impliedValues.hour = 9;
+  }
+
   const eventName = phrase.replace(parsedPhrase.text, '');
 
-  const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('DD/MM/YYYY-HH:mm').split('-');
-  const endDate = parsedPhrase.end && moment(parsedPhrase.end.date()).format('DD/MM/YYYY-HH:mm').split('-');
+  const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('L-hh:mma').split('-');
+  const endDate = parsedPhrase.end && moment(parsedPhrase.end.date()).format('L-hh:mma').split('-');
 
   return {
     name: clearPhrase(eventName),

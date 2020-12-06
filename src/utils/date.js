@@ -27,8 +27,8 @@ export const parsePhrase = (phrase) => {
 
   const eventName = phrase.replace(parsedPhrase.text, '');
 
-  const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('L-HH:mm').split('-');
-  const endDate = parsedPhrase.end && moment(parsedPhrase.end.date()).format('L-HH:mm').split('-');
+  const startDate = parsedPhrase.start && moment(parsedPhrase.start.date()).format('L-hh:mma').split('-');
+  const endDate = parsedPhrase.end && moment(parsedPhrase.end.date()).format('L-hh:mma').split('-');
 
   return {
     name: clearPhrase(eventName),

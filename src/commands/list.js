@@ -15,7 +15,7 @@ export const getReminders = () => applescript.execFile(getRemindersPath);
 export const getReminderDate = async ({ name }) => {
   const date = await applescript.execFile(getReminderPath, [name]);
 
-  return moment(date, 'dddd, D MMMM YYYY H:mm:ss').format('DD/MM/YYYY-HH:mm').split('-');
+  return moment(date, 'dddd, D MMMM YYYY H:mm:ss').format('L-HH:mm').split('-');
 };
 
 const showReminderList = async () => {
@@ -83,7 +83,7 @@ export const updateReminder = async (reminderName, { name, date, time }) => {
   spinner.start();
   spinner.text = 'Updating reminder';
 
-  const datetime = moment(`${date} ${time}`, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+  const datetime = moment(`${date} ${time}`, 'L HH:mm').format('YYYY-MM-DD HH:mm');
   const args = [
     reminderName,
     name,

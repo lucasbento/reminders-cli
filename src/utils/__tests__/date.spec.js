@@ -37,6 +37,11 @@ it('should parse phrases correctly', () => {
     parsedPhrase: 'feed the doggies',
     date: moment().add(1, 'day').format('L'),
     time: '12:00pm',
+  }, {
+    phrase: 'remind me tomorrow to call bob',
+    parsedPhrase: 'call bob',
+    date: moment().add(1, 'day').format('L'),
+    time: '09:00am',
   }];
 
   phrases.forEach(({ phrase, parsedPhrase, date, time }) => {

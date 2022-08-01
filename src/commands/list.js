@@ -4,6 +4,7 @@ import inquirer from 'inquirer';
 import moment from 'moment';
 import chalk from 'chalk';
 import { DateRange } from '../utils';
+import add from './add';
 
 const getRemindersPath = `${__dirname}/../scripts/get_reminders.applescript`;
 const updateReminderPath = `${__dirname}/../scripts/update_reminder.applescript`;
@@ -31,12 +32,20 @@ const showReminderList = async () => {
     {
       type: 'list',
       name: 'name',
-      message: 'Reminders',
-      choices: reminders,
+      message: reminders.length > 0 ? 'Reminders' : 'You don\'t have any reminders.',
+      choices: reminders.length > 0 ? reminders : ['Create new one', 'Exit'],
     },
   ];
 
   const chosenReminder = await inquirer.prompt(reminderList);
+
+  if (reminders.length === 0) {
+    if (chosenReminder.name === 'Create new one') {
+      add();
+      return;
+    }
+    process.exit();
+  }
 
   spinner.start();
 
